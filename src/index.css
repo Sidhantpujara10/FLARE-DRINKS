@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* Palette: white base, fiery orange accent, midnight navy as the third color. No gradients anywhere. */
+@theme {
+  --color-flare: #FF5A1F;       /* fiery orange: buttons, big headlines, highlights */
+  --color-flare-deep: #C2410C;  /* darker orange for small text on white (passes contrast) */
+  --color-flare-soft: #FFE8DE;  /* flat tint for chips and hover states */
+  --color-ink: #0B1F3A;         /* midnight navy: body text, dark sections */
+  --color-ink-soft: #3A4D6B;
+  --color-mist: #F5F6F8;
+  --font-display: "Archivo Black", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+html { background: #fff; color: var(--color-ink); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--color-flare); color: var(--color-ink); }
+
+.text-outline { color: transparent; -webkit-text-stroke: 2px var(--color-ink); }
+.text-outline-flare { color: transparent; -webkit-text-stroke: 2px var(--color-flare); }
+
+/* Banner animations (pure CSS so the banners also work outside React) */
+@keyframes slide-up { from { transform: translateY(110%); } to { transform: translateY(0); } }
+@keyframes pop { 0% { transform: scale(.6); opacity: 0 } 70% { transform: scale(1.08); opacity: 1 } 100% { transform: scale(1) } }
+@keyframes wobble { 0%,100% { transform: rotate(-8deg) } 50% { transform: rotate(6deg) } }
+@keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgb(255 90 31 / .6) } 100% { box-shadow: 0 0 0 14px rgb(255 90 31 / 0) } }
+@keyframes ticker { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+.anim-slide-up { animation: slide-up .7s cubic-bezier(.22,1,.36,1) both; }
+.anim-pop { animation: pop .6s cubic-bezier(.22,1,.36,1) both; }
+.anim-wobble { animation: wobble 2.4s ease-in-out infinite; }
+.anim-pulse { animation: pulse-ring 1.6s ease-out infinite; }
+.anim-ticker { animation: ticker 9s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
